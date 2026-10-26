@@ -1,0 +1,35 @@
+# --- Secrets & Credentials (Never Commit) ---
+.env
+.env.*
+!.env.example
+secrets*
+*.key
+*.pem
+*.crt
+*.pfx
+**/acme.json
+
+# --- Logs & Runtime State ---
+*.log
+**/*.log
+*.session
+crash.log
+
+# --- Infrastructure & Tooling Caches ---
+packer_cache/
+downloaded_iso_path/
+*.box
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+ansible/roles/
+ansible/collections/
+
+# --- OS & Editors ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~

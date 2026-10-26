@@ -1,0 +1,25 @@
+[hooks]
+enter = "mise install --quiet"
+postinstall = "hk install --mise"
+
+[env]
+HK_MISE = 1
+
+[settings]
+lockfile = true
+lockfile_platforms = ["linux-x64"]
+
+[settings.aqua]
+cosign = true
+slsa = true
+github_attestations = true
+
+[tools]
+actionlint = "latest"
+betterleaks = "latest"
+hk = "latest"
+"npm:pin-github-action" = "latest"
+prettier = "latest"
+shellcheck = "latest"
+shfmt = "latest"
+zizmor = "latest"

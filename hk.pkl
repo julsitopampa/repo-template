@@ -1,0 +1,37 @@
+amends "package://github.com/jdx/hk/releases/download/v1.57.0/hk@1.57.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.57.0/hk@1.57.0#/Builtins.pkl"
+
+local linters = new Mapping<String, Step> {
+    ["betterleaks"] {
+        check = "betterleaks git --pre-commit --redact --staged --verbose"
+    }
+    ["pin-github-actions"] {
+        glob = List(".github/workflows/*.yml", ".github/workflows/*.yaml")
+        fix = "pin-github-action --recursive .github/workflows/"
+    }
+    ["actionlint"] = Builtins.actionlint
+    ["zizmor"] = Builtins.zizmor
+    ["prettier"] = Builtins.prettier
+    ["shellcheck"] = Builtins.shellcheck
+    ["shfmt"] = Builtins.shfmt
+}
+
+hooks {
+    ["pre-commit"] {
+        fix = true
+        stash = "git"
+        steps = linters
+    }
+    ["commit-msg"] {
+        steps {
+            ["check-conventional-commit"] = Builtins.check_conventional_commit
+        }
+    }
+    ["fix"] {
+        fix = true
+        steps = linters
+    }
+    ["check"] {
+        steps = linters
+    }
+}
